@@ -1,0 +1,13 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://crrq1fbo8acxh"]
+
+[ext_resource type="Shader" path="res://shaders/PSX_VertexLit.gdshader" id="1_57kgy"]
+[ext_resource type="Texture2D" uid="uid://cmnsvtiayw367" path="res://assets/textures/brick_128.jpg" id="2_c3pu2"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_57kgy")
+shader_parameter/tint_color = Color(1, 1, 1, 1)
+shader_parameter/snap_strength = 1.0
+shader_parameter/triplanar_mode = 2
+shader_parameter/uv_scale = 1.0
+shader_parameter/albedo = ExtResource("2_c3pu2")

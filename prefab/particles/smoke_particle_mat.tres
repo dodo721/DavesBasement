@@ -1,0 +1,19 @@
+[gd_resource type="ParticleProcessMaterial" load_steps=3 format=3 uid="uid://cr7p87pamaqr4"]
+
+[sub_resource type="Curve" id="Curve_srtvf"]
+max_value = 100.0
+_data = [Vector2(0, 0), 0.0, 140.0, 0, 0, Vector2(1, 100), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_jl0vq"]
+curve = SubResource("Curve_srtvf")
+
+[resource]
+gravity = Vector3(0, 0.1, 0)
+linear_accel_min = -0.05
+linear_accel_max = -0.05
+damping_curve = SubResource("CurveTexture_jl0vq")
+scale_min = 0.1
+scale_max = 0.3
+anim_speed_min = 1.0
+anim_speed_max = 1.0

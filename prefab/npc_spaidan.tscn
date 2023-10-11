@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://c8ade4xmteebc"]
+
+[ext_resource type="PackedScene" uid="uid://cx3hemq7o0lo7" path="res://prefab/npc_base.tscn" id="1_uhd7i"]
+[ext_resource type="SpriteFrames" uid="uid://ceukusi17woih" path="res://animations/sprites/spaidan.tres" id="2_ubab6"]
+
+[node name="NPC_Spaidan" instance=ExtResource("1_uhd7i")]
+sprite_frames = ExtResource("2_ubab6")
+frame_progress = 0.279428

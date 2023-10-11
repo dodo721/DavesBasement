@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://cx3hemq7o0lo7"]
+
+[ext_resource type="SpriteFrames" uid="uid://pa3uwg5cn852" path="res://animations/sprites/default_npc.tres" id="1_38vlw"]
+[ext_resource type="Script" path="res://scripts/NPC.cs" id="2_x881u"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_j1raf"]
+radius = 0.276995
+height = 1.33915
+
+[node name="NPC_Base" type="AnimatedSprite3D"]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 1, 0)
+billboard = 1
+shaded = true
+double_sided = false
+texture_filter = 0
+sprite_frames = ExtResource("1_38vlw")
+animation = &"idle"
+script = ExtResource("2_x881u")
+
+[node name="NPCRigidBody3D" type="RigidBody3D" parent="."]
+input_ray_pickable = false
+freeze = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NPCRigidBody3D"]
+shape = SubResource("CapsuleShape3D_j1raf")

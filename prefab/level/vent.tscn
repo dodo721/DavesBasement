@@ -1,0 +1,137 @@
+[gd_scene load_steps=16 format=3 uid="uid://dwmlty3liiw58"]
+
+[ext_resource type="PackedScene" uid="uid://diram2em4j44c" path="res://assets/models/vent.glb" id="1_375er"]
+[ext_resource type="Script" path="res://scripts/interactables/Vent.cs" id="2_jpkmf"]
+[ext_resource type="Shader" path="res://shaders/PSX_VertexLit.gdshader" id="2_tiw57"]
+[ext_resource type="Texture2D" uid="uid://bpyi8vef27v4g" path="res://assets/textures/vent_texture.png" id="3_p2aq8"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_glakn"]
+render_priority = 0
+shader = ExtResource("2_tiw57")
+shader_parameter/tint_color = Color(1, 1, 1, 1)
+shader_parameter/snap_strength = 1.0
+shader_parameter/triplanar_mode = null
+shader_parameter/uv_scale = 1.0
+shader_parameter/albedo = ExtResource("3_p2aq8")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4u113"]
+render_priority = 0
+shader = ExtResource("2_tiw57")
+shader_parameter/tint_color = Color(0, 0, 0, 1)
+shader_parameter/snap_strength = 1.0
+shader_parameter/triplanar_mode = null
+shader_parameter/uv_scale = 1.0
+
+[sub_resource type="Animation" id="Animation_oim88"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Cube:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Cube:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-0.000191438, 0.00365981, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_3royl"]
+_data = {
+"RESET": SubResource("Animation_oim88")
+}
+
+[sub_resource type="Animation" id="Animation_f43ta"]
+resource_name = "vent_open"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Cube:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.3, 0.5, 0.8, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(1.46576, 0, 0), Vector3(1.8419, 0, 0), Vector3(1.4212, 0, 0), Vector3(1.6283, 0, 0), Vector3(1.58713, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Cube:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.5, 0.8, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(-0.000191438, 0.00365981, 0), Vector3(-0.000191438, -0.162986, -0.196972), Vector3(-0.000191438, -0.156778, -0.443351), Vector3(-0.000191438, -0.0806865, -0.565397), Vector3(-0.000191438, -0.16033, -0.435933), Vector3(-0.000191438, -0.125009, -0.507068), Vector3(-0.000191438, -0.124205, -0.490397)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_j4c86"]
+_data = {
+"vent_open": SubResource("Animation_f43ta")
+}
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_lbi4r"]
+animation = &"RESET"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_hwctk"]
+animation = &"Interactions/vent_open"
+
+[sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_glxj2"]
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_w6k76"]
+graph_offset = Vector2(-370.13, 48.73)
+nodes/default/node = SubResource("AnimationNodeAnimation_lbi4r")
+nodes/default/position = Vector2(-100, 80)
+nodes/open/node = SubResource("AnimationNodeAnimation_hwctk")
+nodes/open/position = Vector2(-200, 240)
+nodes/trigger/node = SubResource("AnimationNodeBlend2_glxj2")
+nodes/trigger/position = Vector2(100, 140)
+node_connections = [&"output", 0, &"trigger", &"trigger", 0, &"default", &"trigger", 1, &"open"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_k32vw"]
+size = Vector3(0.219802, 0.415744, 0.714693)
+
+[node name="vent" instance=ExtResource("1_375er")]
+script = ExtResource("2_jpkmf")
+
+[node name="Cube" parent="." index="0"]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, -0.000191438, 0.00365981, 0)
+surface_material_override/0 = SubResource("ShaderMaterial_glakn")
+
+[node name="Plane" parent="." index="1"]
+transform = Transform3D(-8.74228e-09, 0.2, 0, -0.2, -8.74228e-09, 0, 0, 0, 0.333, -0.00858695, -8.94794e-05, -0.00637407)
+surface_material_override/0 = SubResource("ShaderMaterial_4u113")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="2"]
+libraries = {
+"": SubResource("AnimationLibrary_3royl"),
+"Interactions": SubResource("AnimationLibrary_j4c86")
+}
+
+[node name="AnimationTree" type="AnimationTree" parent="." index="3"]
+tree_root = SubResource("AnimationNodeBlendTree_w6k76")
+anim_player = NodePath("../AnimationPlayer")
+active = true
+parameters/trigger/blend_amount = 0.0
+
+[node name="InteractRigidBody3D" type="RigidBody3D" parent="." index="4"]
+freeze = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InteractRigidBody3D" index="0"]
+shape = SubResource("BoxShape3D_k32vw")

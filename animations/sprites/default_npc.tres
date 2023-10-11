@@ -1,0 +1,18 @@
+[gd_resource type="SpriteFrames" load_steps=3 format=3 uid="uid://pa3uwg5cn852"]
+
+[ext_resource type="Texture2D" uid="uid://c5hq8wonp0ra6" path="res://assets/sprites/default_npc/default_npc_1.png" id="1_b12qe"]
+[ext_resource type="Texture2D" uid="uid://b2k0274xoo1mb" path="res://assets/sprites/default_npc/default_npc_2.png" id="2_txear"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_b12qe")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_txear")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 1.0
+}]

@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://dyvure1oesfcb"]
+
+[ext_resource type="PackedScene" uid="uid://dwmlty3liiw58" path="res://prefab/level/vent.tscn" id="1_o4siw"]
+[ext_resource type="Script" path="res://scripts/interactables/VentTrap.cs" id="2_hd3x5"]
+
+[node name="vent_trap" instance=ExtResource("1_o4siw")]
+script = ExtResource("2_hd3x5")
+ethan = null
+
+[node name="EthanTP" type="Node3D" parent="." index="5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.279702, 0, 0)

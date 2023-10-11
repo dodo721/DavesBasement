@@ -1,0 +1,14 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://dqvkqcl1gj20a"]
+
+[ext_resource type="Shader" path="res://shaders/joint.gdshader" id="1_36t4k"]
+[ext_resource type="Texture2D" uid="uid://b30txr6a4ekwf" path="res://assets/textures/joint_joint_paper.png" id="2_0mwfs"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_36t4k")
+shader_parameter/EndEmission = Color(0.858824, 0.219608, 0, 1)
+shader_parameter/Smoked = 1.0
+shader_parameter/BurnLength = 1.045
+shader_parameter/LengthMax = -11.93
+shader_parameter/LengthMin = -2.065
+shader_parameter/Albedo = ExtResource("2_0mwfs")

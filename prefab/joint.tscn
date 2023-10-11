@@ -1,0 +1,36 @@
+[gd_scene load_steps=8 format=3 uid="uid://ceu4aytoa4yfe"]
+
+[ext_resource type="PackedScene" uid="uid://dq3wl346725qw" path="res://assets/models/joint.glb" id="1_gvfnc"]
+[ext_resource type="Script" path="res://scripts/Joint.cs" id="2_at5v1"]
+[ext_resource type="ArrayMesh" uid="uid://xx740vy3amn8" path="res://assets/models/meshes/joint_new.res" id="3_6dyy0"]
+[ext_resource type="Material" uid="uid://dqvkqcl1gj20a" path="res://prefab/materials/joint_mat.tres" id="4_35jnw"]
+[ext_resource type="Material" uid="uid://cr7p87pamaqr4" path="res://prefab/particles/smoke_particle_mat.tres" id="4_tvljk"]
+[ext_resource type="Material" uid="uid://dwd8andn7pefx" path="res://prefab/particles/smoke_texture_mat.tres" id="5_s480p"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_5onrq"]
+material = ExtResource("5_s480p")
+
+[node name="joint" instance=ExtResource("1_gvfnc")]
+script = ExtResource("2_at5v1")
+smokeRate = 0.05
+endOffset = 0.19
+
+[node name="Joint" parent="." index="0"]
+transform = Transform3D(0.1, 0, 0, 0, -4.37114e-09, -0.1, 0, 0.1, -4.37114e-09, 0, 0, 0)
+layers = 2
+mesh = ExtResource("3_6dyy0")
+surface_material_override/0 = ExtResource("4_35jnw")
+
+[node name="End" type="Node3D" parent="." index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, -1.04466)
+
+[node name="Smoke" type="GPUParticles3D" parent="End" index="0"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+layers = 2
+emitting = false
+lifetime = 5.0
+randomness = 0.33
+visibility_aabb = AABB(-6.27116, -5.32374, -13.514, 12.5423, 10.6475, 23.1862)
+local_coords = true
+process_material = ExtResource("4_tvljk")
+draw_pass_1 = SubResource("QuadMesh_5onrq")

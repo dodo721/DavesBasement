@@ -1,0 +1,18 @@
+[gd_resource type="SpriteFrames" load_steps=3 format=3 uid="uid://ceukusi17woih"]
+
+[ext_resource type="Texture2D" uid="uid://cxkkuwpxmpsaf" path="res://assets/sprites/spaidan/spaidan_idle_1.png" id="1_lf04h"]
+[ext_resource type="Texture2D" uid="uid://dev6uxwwmddut" path="res://assets/sprites/spaidan/spaidan_idle_2.png" id="2_7txi8"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_lf04h")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_7txi8")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 1.0
+}]

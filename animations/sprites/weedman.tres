@@ -1,0 +1,14 @@
+[gd_resource type="SpriteFrames" load_steps=2 format=3 uid="uid://bftuhfv5sx261"]
+
+[ext_resource type="Texture2D" uid="uid://dfg8sw8jao6g8" path="res://assets/sprites/weedman/weedman.png" id="1_j1xma"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_j1xma")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 1.0
+}]

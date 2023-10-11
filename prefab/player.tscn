@@ -1,0 +1,75 @@
+[gd_scene load_steps=8 format=3 uid="uid://deq2qn36kyop5"]
+
+[ext_resource type="Script" path="res://scripts/Player.cs" id="1_j8fb2"]
+[ext_resource type="Environment" uid="uid://b0jioq3se76hi" path="res://environment.tres" id="2_ai34y"]
+[ext_resource type="PackedScene" uid="uid://ceu4aytoa4yfe" path="res://prefab/joint.tscn" id="2_ucpkr"]
+[ext_resource type="Script" path="res://scripts/JointLight.cs" id="4_yhhj5"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_2sou5"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_q3dcm"]
+
+[sub_resource type="Environment" id="Environment_wx7sc"]
+ambient_light_source = 2
+ambient_light_color = Color(0.239216, 0.172549, 0.117647, 1)
+
+[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("joint")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 2.126)
+script = ExtResource("1_j8fb2")
+lookSpeed = 0.2
+speed = 100.0
+interactionRange = 2.0
+joint = NodePath("JointCanvasLayer/JointViewportContainer/JointViewport/JointPreview/joint")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_2sou5")
+
+[node name="Mesh" type="MeshInstance3D" parent="."]
+mesh = SubResource("CapsuleMesh_q3dcm")
+skeleton = NodePath("../..")
+
+[node name="PlayerCamera" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.55705, -0.00444984)
+cull_mask = 1048573
+environment = ExtResource("2_ai34y")
+
+[node name="JointLight" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.119367, -0.111959)
+light_color = Color(0.976471, 0.65098, 0, 1)
+light_energy = 0.01
+omni_range = 10.0
+omni_attenuation = 1.5
+script = ExtResource("4_yhhj5")
+smokeLightUpSmooth = 0.2
+smokeLightDownSmooth = 0.05
+smokeLightEnergy = 0.5
+smokeLightEnergyMin = 0.05
+smokeLightRange = 10.0
+smokeLightRangeMin = 2.0
+
+[node name="JointCanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="JointViewportContainer" type="SubViewportContainer" parent="JointCanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch = true
+
+[node name="JointViewport" type="SubViewport" parent="JointCanvasLayer/JointViewportContainer"]
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(1152, 648)
+render_target_update_mode = 4
+
+[node name="JointPreview" type="RemoteTransform3D" parent="JointCanvasLayer/JointViewportContainer/JointViewport"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.55705, 2.12155)
+remote_path = NodePath("../../../../PlayerCamera")
+
+[node name="JointCamera" type="Camera3D" parent="JointCanvasLayer/JointViewportContainer/JointViewport/JointPreview"]
+cull_mask = 1047554
+environment = SubResource("Environment_wx7sc")
+
+[node name="joint" parent="JointCanvasLayer/JointViewportContainer/JointViewport/JointPreview" instance=ExtResource("2_ucpkr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.25, -0.134208, -0.407552)

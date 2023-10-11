@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://li2bse71kdq0"]
+
+[ext_resource type="PackedScene" uid="uid://cx3hemq7o0lo7" path="res://prefab/npc_base.tscn" id="1_lhcvo"]
+[ext_resource type="SpriteFrames" uid="uid://bftuhfv5sx261" path="res://animations/sprites/weedman.tres" id="2_myoc3"]
+
+[node name="NPC_Weedman" instance=ExtResource("1_lhcvo")]
+sprite_frames = ExtResource("2_myoc3")

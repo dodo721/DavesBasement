@@ -1,0 +1,109 @@
+[gd_scene load_steps=17 format=3 uid="uid://dr7k7qato4umi"]
+
+[ext_resource type="PackedScene" uid="uid://yotk73s3kdyk" path="res://assets/models/ethan.glb" id="1_8s1j1"]
+[ext_resource type="Script" path="res://scripts/EthanAnimator.cs" id="2_ufq1v"]
+[ext_resource type="Shader" path="res://shaders/PSX_VertexLit.gdshader" id="3_la2s4"]
+[ext_resource type="Texture2D" uid="uid://d2gf3atyajkr3" path="res://assets/textures/ethan_ethan_face.png" id="4_amtx3"]
+[ext_resource type="Texture2D" uid="uid://bp1bavxg1e72f" path="res://assets/textures/ethan_ethan_body_texture.png" id="5_oj7mh"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_t8486"]
+render_priority = 0
+shader = ExtResource("3_la2s4")
+shader_parameter/tint_color = Color(1, 1, 1, 1)
+shader_parameter/snap_strength = 1.0
+shader_parameter/triplanar_mode = null
+shader_parameter/uv_scale = 1.0
+shader_parameter/albedo = ExtResource("4_amtx3")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ka04o"]
+render_priority = 0
+shader = ExtResource("3_la2s4")
+shader_parameter/tint_color = Color(1, 1, 1, 1)
+shader_parameter/snap_strength = 1.0
+shader_parameter/triplanar_mode = null
+shader_parameter/uv_scale = 1.0
+shader_parameter/albedo = ExtResource("5_oj7mh")
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ltf5l"]
+animation = &"Chasing"
+
+[sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_wjb1e"]
+fadeout_time = 1.08
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_sy60j"]
+animation = &"CrawlFromVent"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_60g16"]
+animation = &"Default"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_xhf5b"]
+animation = &"Looking"
+
+[sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_opeey"]
+fadein_time = 0.5
+fadeout_time = 0.2
+
+[sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_nu71b"]
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_wur1d"]
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_wirhs"]
+graph_offset = Vector2(-762.196, 204.094)
+nodes/Chasing/node = SubResource("AnimationNodeAnimation_ltf5l")
+nodes/Chasing/position = Vector2(-680, 220)
+nodes/CrawlTrigger/node = SubResource("AnimationNodeOneShot_wjb1e")
+nodes/CrawlTrigger/position = Vector2(140, 120)
+nodes/Crawling/node = SubResource("AnimationNodeAnimation_sy60j")
+nodes/Crawling/position = Vector2(-160, 380)
+nodes/Default/node = SubResource("AnimationNodeAnimation_60g16")
+nodes/Default/position = Vector2(-520, 60)
+nodes/Looking/node = SubResource("AnimationNodeAnimation_xhf5b")
+nodes/Looking/position = Vector2(-340, 300)
+nodes/LookingTrigger/node = SubResource("AnimationNodeOneShot_opeey")
+nodes/LookingTrigger/position = Vector2(-100, 120)
+nodes/WalkIntensity/node = SubResource("AnimationNodeBlend2_nu71b")
+nodes/WalkIntensity/position = Vector2(-340, 80)
+nodes/WalkSpeed/node = SubResource("AnimationNodeTimeScale_wur1d")
+nodes/WalkSpeed/position = Vector2(-520, 200)
+nodes/output/position = Vector2(340, 140)
+node_connections = [&"output", 0, &"CrawlTrigger", &"CrawlTrigger", 0, &"LookingTrigger", &"CrawlTrigger", 1, &"Crawling", &"WalkIntensity", 0, &"Default", &"WalkIntensity", 1, &"WalkSpeed", &"WalkSpeed", 0, &"Chasing", &"LookingTrigger", 0, &"WalkIntensity", &"LookingTrigger", 1, &"Looking"]
+
+[node name="ethan_model" instance=ExtResource("1_8s1j1")]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, 0)
+script = ExtResource("2_ufq1v")
+
+[node name="Skeleton3D" parent="EthanBones" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+bones/0/rotation = Quaternion(0.707107, -5.33851e-08, -5.33851e-08, 0.707107)
+bones/3/rotation = Quaternion(-0.707107, 5.33851e-08, 5.33851e-08, 0.707107)
+bones/5/position = Vector3(-0.781927, 0.58296, 0.00119239)
+bones/5/rotation = Quaternion(-3.65176e-08, -7.94126e-08, 0.797009, 0.603967)
+bones/6/position = Vector3(-0.781927, 0.58296, 0.00119239)
+bones/6/rotation = Quaternion(-3.65176e-08, -7.94126e-08, 0.797009, 0.603967)
+
+[node name="Ethan" parent="EthanBones/Skeleton3D" index="0"]
+surface_material_override/0 = SubResource("ShaderMaterial_t8486")
+surface_material_override/1 = SubResource("ShaderMaterial_ka04o")
+
+[node name="EyeAttachment" type="BoneAttachment3D" parent="EthanBones/Skeleton3D" index="1"]
+transform = Transform3D(-0.270448, -0.962735, -1.54135e-07, 0.962735, -0.270448, -8.24742e-08, 3.77154e-08, -1.70696e-07, 1, -0.781927, 1.79791, 0.00119239)
+bone_name = "Eyes"
+bone_idx = 5
+
+[node name="Eyes" type="Node3D" parent="EthanBones/Skeleton3D/EyeAttachment" index="0"]
+transform = Transform3D(-0.959314, -0.282341, -8.74228e-08, -0.282341, 0.959314, 0, 8.38659e-08, 2.46831e-08, -1, 1.20897, -1.09234, 1.12413)
+
+[node name="AnimationTree" type="AnimationTree" parent="." index="2"]
+tree_root = SubResource("AnimationNodeBlendTree_wirhs")
+anim_player = NodePath("../AnimationPlayer")
+active = true
+parameters/CrawlTrigger/active = false
+parameters/CrawlTrigger/internal_active = false
+parameters/CrawlTrigger/request = 0
+parameters/LookingTrigger/active = false
+parameters/LookingTrigger/internal_active = false
+parameters/LookingTrigger/request = 0
+parameters/WalkIntensity/blend_amount = 0.0
+parameters/WalkSpeed/scale = 1.0
+
+[connection signal="animation_finished" from="AnimationTree" to="." method="_OnAnimationFinish"]

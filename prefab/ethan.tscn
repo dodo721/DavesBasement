@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://ccgtikvme07en"]
+
+[ext_resource type="PackedScene" uid="uid://dr7k7qato4umi" path="res://prefab/ethan_model.tscn" id="1_ge0vt"]
+[ext_resource type="Script" path="res://scripts/Ethan.cs" id="2_2qlpj"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_bvisb"]
+radius = 0.561762
+height = 2.13864
+
+[node name="ethan" type="CharacterBody3D"]
+script = ExtResource("2_2qlpj")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.826548, 0)
+shape = SubResource("CapsuleShape3D_bvisb")
+
+[node name="ethan_model" parent="." instance=ExtResource("1_ge0vt")]
+transform = Transform3D(-0.3, 0, -2.62268e-08, 0, 0.3, 0, 2.62268e-08, 0, -0.3, 0, 0, 0)

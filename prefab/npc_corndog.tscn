@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://63sxhhcm0lar"]
+
+[ext_resource type="PackedScene" uid="uid://cx3hemq7o0lo7" path="res://prefab/npc_base.tscn" id="1_aku0g"]
+[ext_resource type="SpriteFrames" uid="uid://b8vege52vrulu" path="res://animations/sprites/corndog.tres" id="2_6ed5p"]
+
+[node name="NPC_Corndog" instance=ExtResource("1_aku0g")]
+sprite_frames = ExtResource("2_6ed5p")
